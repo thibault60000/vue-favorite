@@ -11,5 +11,11 @@ export default {
 </script>
 
 <style>
-  /* Style du composant principal */
+  @import 'assets/fonts/fonts.css';
+
+  body {
+    font: 100%/1.2 "quicksandregular", Helvetica, Arial, sans-serif;
+    margin: 0;
+  }
+
 </style>
