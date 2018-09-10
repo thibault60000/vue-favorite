@@ -17,5 +17,8 @@ export default {
     font: 100%/1.2 "quicksandregular", Helvetica, Arial, sans-serif;
     margin: 0;
   }
-
+  nav {
+    background-color : #21a3e4;
+    padding: 0.8rem 2rem;
+  }
 </style>

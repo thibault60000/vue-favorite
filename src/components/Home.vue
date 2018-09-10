@@ -1,23 +1,45 @@
 <template>
-    <div class='Home'>
-        <NavigationMenu />
-        <h1>{{ msg }}</h1>
-        <button v-on:click="logout">Logout</button>
-    </div>
+  <main>
+    <nav>
+      <div v-if="!userExist" class='login'>
+        <h1> SourceDevDesign </h1>
+      </div>
+      <div v-else class="login">
+        <h1>Bonjour <span> {{ this.userMail }} </span></h1>
+        <el-button v-on:click="logout" type="danger">Se déconnecter</el-button>
+      </div>
+    </nav>
+    <CreateFavorite />
+    <CardList />
+  </main>
 </template>
 
 <script>
 import firebase from 'firebase'
-import NavigationMenu from './NavigationMenu'
+import { db } from '../main'
+import CardList from './CardList'
+import CreateFavorite from './CreateFavorite'
 
 export default {
   name: 'home',
-  components: {
-    NavigationMenu
-  },
   data () {
     return {
-      msg: 'Bienvenue'
+      user: '',
+      userMail: '',
+      users: []
+    }
+  },
+  components: {
+    CardList, CreateFavorite
+  },
+  computed: {
+    userExist () {
+      return !!this.user
+    }
+  },
+  firestore () {
+    return {
+      users: db.collection('users').orderBy('createdAt')
     }
   },
   methods: {
@@ -26,10 +48,21 @@ export default {
         this.$router.replace('login')
       })
     }
+  },
+  created () {
+    this.user = firebase.auth().currentUser
+    this.userMail = firebase.auth().currentUser.email
   }
 }
 </script>
 
 <style scoped>
-    /* CSS */
+    h1 {
+      color: #f5f5f5;
+    }
+    div.login > button {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
 </style>

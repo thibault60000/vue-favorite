@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 
 /* Element UI */
@@ -9,12 +7,15 @@ import locale from 'element-ui/lib/locale/lang/fr'
 
 /* Firebase */
 import firebase from 'firebase'
+import Vuefire from 'vuefire'
+import 'firebase/firestore'
 
 import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
+Vue.use(Vuefire)
 
 let app
 let config = {
@@ -27,6 +28,7 @@ let config = {
 }
 
 firebase.initializeApp(config)
+
 firebase.auth().onAuthStateChanged(function (user) {
   if (!app) {
     /* eslint-disable no-new */
@@ -38,3 +40,8 @@ firebase.auth().onAuthStateChanged(function (user) {
     })
   }
 })
+
+/* Firestore */
+export const db = firebase.firestore()
+const settings = {timestampsInSnapshots: true}
+db.settings(settings)

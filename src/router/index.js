@@ -4,12 +4,12 @@ import Router from 'vue-router'
 import Components from '@/components/Components'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
-import SignUp from '@/components/SignUp'
 import firebase from 'firebase'
 
 Vue.use(Router)
 
 let router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/components',
@@ -28,11 +28,6 @@ let router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
-    },
-    {
-      path: '/sign-up',
-      name: 'SignUp',
-      component: SignUp
     },
     {
       path: '/home',
