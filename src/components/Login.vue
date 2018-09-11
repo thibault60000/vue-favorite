@@ -47,11 +47,6 @@ export default {
   components: {
     CardList
   },
-  computed: {
-    userExist () {
-      return !!this.user
-    }
-  },
   created () {
     if (firebase.auth().currentUser) {
       this.user = firebase.auth().currentUser

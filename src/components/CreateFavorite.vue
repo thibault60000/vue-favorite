@@ -12,7 +12,7 @@
         <el-form-item label="category">
             <el-input v-model="form.category"></el-input>
         </el-form-item>
-        <el-button type="primary" @click="addFavory" >Primary</el-button>
+        <el-button type="primary" @click="addFavory" >Créer</el-button>
     </el-form>
 </template>
 
@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    addFavory () {
+    addFavory (event) {
       db.collection('articles').add({
         title: this.form.title,
         description: this.form.description,
@@ -43,6 +43,7 @@ export default {
       }).catch(function (error) {
         console.error('Erreur pendant la création : ', error)
       })
+      this.form.title = this.form.description = this.form.category = this.form.url = ''
     }
   }
 }

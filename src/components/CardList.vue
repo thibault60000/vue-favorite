@@ -43,6 +43,17 @@ export default {
  }
  div.articlesList article h2 {
      margin-bottom: 0.2rem;
+     position: relative;
+ }
+ div.articlesList article h2 > span {
+    position: absolute;
+    bottom: -1.2rem;
+    right: -0.7rem;
+    background-color: #189053;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
  }
  h2 {
    color: #4692d6;
