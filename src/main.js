@@ -10,12 +10,15 @@ import firebase from 'firebase'
 import Vuefire from 'vuefire'
 import 'firebase/firestore'
 
+import Vue3dMenu from 'vue-3d-menu'
+
 import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
 Vue.use(Vuefire)
+Vue.use(Vue3dMenu)
 
 let app
 let config = {

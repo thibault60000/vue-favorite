@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Components from '@/components/Components'
+import AdminPage from '@/components/AdminPage'
 import Home from '@/components/Home'
-import Login from '@/components/Login'
 import firebase from 'firebase'
+import Cours from '@/components/Cours'
+import Favorites from '@/components/Favorites'
+import Inscription from '@/components/Inscription'
 
 Vue.use(Router)
 
@@ -12,27 +14,43 @@ let router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/components',
-      name: 'Components',
-      component: Components
-    },
-    {
       path: '*',
-      redirect: '/login'
+      redirect: '/home'
     },
     {
       path: '/',
-      redirect: '/login'
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      redirect: '/home'
     },
     {
       path: '/home',
       name: 'Home',
-      component: Home,
+      component: Home
+    },
+    {
+      path: '/cours',
+      name: 'Cours',
+      component: Cours,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/favorites',
+      name: 'Favorites',
+      component: Favorites,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/inscription',
+      name: 'Inscription',
+      component: Inscription
+    },
+    {
+      path: '/adminpage',
+      name: 'AdminPage',
+      component: AdminPage,
       meta: {
         requiresAuth: true
       }
@@ -44,8 +62,8 @@ router.beforeEach((to, from, next) => {
   let currentUser = firebase.auth().currentUser
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
-  if (requiresAuth && !currentUser) next('login')
-  else if (!requiresAuth && currentUser) next('home')
+  if (requiresAuth && !currentUser) next('home')
+  else if (!requiresAuth && currentUser) next('adminpage')
   else next()
 })
 

@@ -1,68 +1,71 @@
 <template>
-  <main>
-    <nav>
-      <div v-if="!userExist" class='login'>
-        <h1> SourceDevDesign </h1>
+  <div class="homePage">
+     <router-link class="noAccount" to='/inscription'>Je souhaite m'inscrire</router-link>
+    <!-- WELCOME MESSAGE -->
+    <main class="homePageContent">
+      <h1 class="glitched">Bienvenue
+        <div class="glitch-window">
+          <h1 class="glitched">Bienvenue</h1>
+          </div>
+      </h1>
+      <h2> Veuillez vous connecter </h2>
+      <!-- LOGIN FORM -->
+      <div class='login'>
+          <el-form :model="form" autocomplete="off">
+            <el-input placeholder="E-mail" v-model="form.email"></el-input>
+            <el-input type="password" placeholder="Mot de passe" v-model="form.password"></el-input>
+            <el-button @click="signIn">Se connecter</el-button>
+          </el-form>
       </div>
-      <div v-else class="login">
-        <h1>Bonjour <span> {{ this.userMail }} </span></h1>
-        <el-button v-on:click="logout" type="danger">Se déconnecter</el-button>
-      </div>
-    </nav>
-    <CreateFavorite />
-    <CardList />
-  </main>
+    </main>
+    <Menu />
+  </div>
 </template>
 
 <script>
 import firebase from 'firebase'
-import { db } from '../main'
 import CardList from './CardList'
-import CreateFavorite from './CreateFavorite'
+import Menu from './Menu'
 
 export default {
   name: 'home',
   data () {
     return {
+      form: {
+        email: '',
+        password: ''
+      },
+      authUser: null,
       user: '',
-      userMail: '',
-      users: []
+      dialogTableVisible: false,
+      dialogFormVisible: false
     }
   },
   components: {
-    CardList, CreateFavorite
+    CardList, Menu
   },
-  computed: {
-    userExist () {
-      return !!this.user
-    }
-  },
-  firestore () {
-    return {
-      users: db.collection('users').orderBy('createdAt')
+  created () {
+    if (firebase.auth().currentUser) {
+      this.user = firebase.auth().currentUser
+      this.userMail = firebase.auth().currentUser.email
     }
   },
   methods: {
-    logout: function () {
-      firebase.auth().signOut().then(() => {
-        this.$router.replace('login')
-      })
+    signIn: function () {
+      firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.password).then(
+        (user) => {
+          this.$router.replace('adminpage')
+          this.dialogFormVisible = false
+        },
+        (err) => {
+          alert('Oops. ' + err.message)
+        }
+      )
     }
-  },
-  created () {
-    this.user = firebase.auth().currentUser
-    this.userMail = firebase.auth().currentUser.email
   }
 }
 </script>
 
 <style scoped>
-    h1 {
-      color: #f5f5f5;
-    }
-    div.login > button {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-    }
+  /* css */
 </style>

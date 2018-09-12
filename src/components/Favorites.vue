@@ -1,9 +1,9 @@
 <template>
   <main>
+    <Menu />
     <nav>
-      <!-- Menu -->
       <div v-if="!userExist" class='login'>
-        <h1> SourceDevDesign </h1>
+        <h1> Liste de mes principales sources </h1>
         <el-button type="danger" @click="dialogFormVisible = true">Administrateur</el-button>
         <el-dialog title="Connexion en tant qu'Administrateur" width='30%' :visible.sync="dialogFormVisible">
           <el-form :model="form">
@@ -27,6 +27,7 @@
 <script>
 import firebase from 'firebase'
 import CardList from './CardList'
+import Menu from './Menu'
 
 export default {
   name: 'home',
@@ -36,8 +37,6 @@ export default {
         email: '',
         password: ''
       },
-      displayName: null,
-      photoURL: null,
       authUser: null,
       user: '',
       dialogTableVisible: false,
@@ -45,7 +44,7 @@ export default {
     }
   },
   components: {
-    CardList
+    CardList, Menu
   },
   created () {
     if (firebase.auth().currentUser) {
@@ -57,7 +56,7 @@ export default {
     signIn: function () {
       firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.password).then(
         (user) => {
-          this.$router.replace('home')
+          this.$router.replace('adminpage')
           this.dialogFormVisible = false
         },
         (err) => {
@@ -70,13 +69,5 @@ export default {
 </script>
 
 <style scoped>
-  h1 {
-    color: #f5f5f5;
-  }
-  div.login > button {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-  }
-
+  /* css */
 </style>
