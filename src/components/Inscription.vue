@@ -23,7 +23,7 @@
       <!-- Identité -->
       <el-form-item label="Identité*">
           <el-input placeholder="Nom" v-model="form.name" style="width: 100%;"></el-input>
-          <el-input placeholder="Prénom" v-model="form.prénom" style="width: 100%;"></el-input>
+          <el-input placeholder="Prénom" v-model="form.lastname" style="width: 100%;"></el-input>
       </el-form-item>
       <el-form-item label="Date de naissance*">
           <el-date-picker type="date" placeholder="Selectionnez une date" v-model="form.birthday" style="width: 100%;"></el-date-picker>
@@ -36,6 +36,7 @@
 
 <script>
 import firebase from 'firebase'
+import { db } from '../main'
 
 export default {
   name: 'signUp',
@@ -43,7 +44,11 @@ export default {
     return {
       form: {
         email: '',
-        password: ''
+        password: '',
+        statut: '',
+        name: '',
+        lastname: '',
+        birthday: ''
       }
     }
   },
@@ -51,9 +56,22 @@ export default {
     signUp: function () {
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then(
-          user => {
+          object => {
+            console.log(object)
+            db.collection('users').add({
+              id: object.user.uid,
+              email: this.form.email,
+              statut: this.form.statut,
+              name: this.form.name,
+              lastname: this.form.lastname,
+              birthday: this.form.birthday
+            }).then(function (docRef) {
+              console.log('Nouvel utilisateur créé, ID : ', docRef.id)
+            }).catch(function (error) {
+              console.error('Erreur pendant la création : ', error)
+            })
             this.$router.replace('home')
           },
           err => {

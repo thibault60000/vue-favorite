@@ -1,8 +1,8 @@
 <template>
     <div class="articlesList">
         <article v-for="(article, id) in articles" :key="id">
-            <h2> <a :href=article.url> {{ article.title }} </a> </h2>
-            <h3> {{ article.description }} </h3>
+            <h3> <a :href=article.url> {{ article.title }} </a> </h3>
+            <p> {{ article.description }} </p>
             <p class="etiquette"> {{ article.category }} </p>
         </article>
     </div>

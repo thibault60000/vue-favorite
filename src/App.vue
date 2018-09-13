@@ -57,6 +57,26 @@ export default {
     width: 100%;
     transform: translateY(-50%);
   }
+  main.homeUserPage {
+    margin-top: 1rem;
+  }
+   main.homeUserPage button.logout {
+    height: 2.4rem;
+    display: inline-block;
+    vertical-align: middle;
+    width: 2.6rem;
+    border: none;
+    color: white;
+    background-color: #545050;
+    font-size: 1.5rem;
+    border-radius: 2px;
+    margin-left: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+   main.homeUserPage button.logout:hover{
+    background-color: gray;
+  }
   /* **** H1 **** */
   main.homePage h1 {
     font-size: 8rem;
@@ -98,6 +118,13 @@ export default {
    main.homePage h2 {
      margin-top: -4.9rem;
    }
+   main.homeUserPage h2 {
+     text-shadow: none;
+   }
+    main.homeUserPage h2 > span {
+      color: #545050;
+      text-shadow: 1px 1px 1px white;
+    }
     h2:before {
       content: attr(data-heading);
       position: absolute;

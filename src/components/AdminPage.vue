@@ -1,14 +1,6 @@
 <template>
-  <main>
-    <nav>
-      <div v-if="!userExist" class='login'>
-        <h1> SourceDevDesign </h1>
-      </div>
-      <div v-else class="login">
-        <h1>Bonjour <span> {{ this.userMail }} </span></h1>
-        <el-button v-on:click="logout" type="danger">Se déconnecter</el-button>
-      </div>
-    </nav>
+  <main class="homeUserPage">
+    <h2>Bonjour <span> {{ this.userMail }} </span> <button class="logout" @click="logout"><i class="el-icon-close"></i></button></h2>
     <CreateFavorite />
     <CardList />
   </main>
