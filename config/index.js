@@ -50,7 +50,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../docs'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'https://thibault60000.github.io/vue-favorite/',
+    assetsPublicPath: '/vue-favorite',
 
     /**
      * Source Maps
