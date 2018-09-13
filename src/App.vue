@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-  @import 'assets/fonts/fonts.css';
+  @import './assets/fonts/fonts.css';
 
   body {
     font: 100%/1.2 "quicksandregular", Helvetica, Arial, sans-serif;
