@@ -1,37 +1,19 @@
 <template>
   <main class="homeUserPage">
-    <h2>Bonjour <span> {{ this.userMail }} </span> <button class="logout" @click="logout"><i class="el-icon-close"></i></button></h2>
-    <CreateFavorite />
-    <CardList />
+    <h2>Bonjour <span> {{ authUser.lastname }} </span> <button class="logout" @click="logout"><i class="el-icon-close"></i></button></h2>
   </main>
 </template>
 
 <script>
 import firebase from 'firebase'
 import { db } from '../main'
-import CardList from './CardList'
-import CreateFavorite from './CreateFavorite'
 
 export default {
   name: 'adminPage',
   data () {
     return {
-      user: '',
-      userMail: '',
-      users: []
-    }
-  },
-  components: {
-    CardList, CreateFavorite
-  },
-  computed: {
-    userExist () {
-      return !!this.user
-    }
-  },
-  firestore () {
-    return {
-      users: db.collection('users').orderBy('createdAt')
+      authUser: '',
+      articles: []
     }
   },
   methods: {
@@ -41,9 +23,11 @@ export default {
       })
     }
   },
-  created () {
-    this.user = firebase.auth().currentUser
-    this.userMail = firebase.auth().currentUser.email
+  firestore () {
+    return {
+      authUser: db.collection('users').doc(firebase.auth().currentUser.uid),
+      articles: db.collection('articles')
+    }
   }
 }
 </script>

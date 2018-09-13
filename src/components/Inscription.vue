@@ -60,7 +60,7 @@ export default {
         .then(
           object => {
             console.log(object)
-            db.collection('users').add({
+            db.collection('users').doc(object.user.uid).set({
               id: object.user.uid,
               email: this.form.email,
               statut: this.form.statut,
