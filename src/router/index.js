@@ -11,7 +11,6 @@ import Inscription from '@/components/Inscription'
 Vue.use(Router)
 
 let router = new Router({
-  mode: 'history',
   routes: [
     {
       path: '*',
