@@ -1,31 +1,26 @@
 <template>
-  <div class="homePage">
-     <router-link class="noAccount" to='/inscription'>Je souhaite m'inscrire</router-link>
-    <!-- WELCOME MESSAGE -->
-    <main class="homePageContent">
-      <h1 class="glitched">Bienvenue
-        <div class="glitch-window">
-          <h1 class="glitched">Bienvenue</h1>
-          </div>
-      </h1>
-      <h2> Veuillez vous connecter </h2>
-      <!-- LOGIN FORM -->
-      <div class='login'>
-          <el-form :model="form" autocomplete="off">
-            <el-input placeholder="E-mail" v-model="form.email"></el-input>
-            <el-input type="password" placeholder="Mot de passe" v-model="form.password"></el-input>
-            <el-button @click="signIn">Se connecter</el-button>
-          </el-form>
+  <main class="homePage">
+    <!-- Titre du Futur -->
+    <h1 class="glitched">Bienvenue
+      <div class="glitch-window">
+        <h1 class="glitched">Bienvenue</h1>
       </div>
-    </main>
-    <Menu />
-  </div>
+    </h1>
+    <!-- Sous titre -->
+    <h2> Veuillez vous connecter </h2>
+    <!-- Formulaire d'inscription -->
+    <el-form :model="form" class="connexionForm" autocomplete="off">
+      <el-input placeholder="E-mail" v-model="form.email"></el-input>
+      <el-input type="password" placeholder="Mot de passe" v-model="form.password"></el-input>
+      <el-button class="btnConfirmForm" @click="signIn">Se connecter</el-button>
+      <!-- Pas encore inscrit ? -->
+      <router-link to='/inscription'>Je souhaite m'inscrire</router-link>
+    </el-form>
+  </main>
 </template>
 
 <script>
 import firebase from 'firebase'
-import CardList from './CardList'
-import Menu from './Menu'
 
 export default {
   name: 'home',
@@ -40,9 +35,6 @@ export default {
       dialogTableVisible: false,
       dialogFormVisible: false
     }
-  },
-  components: {
-    CardList, Menu
   },
   created () {
     if (firebase.auth().currentUser) {
