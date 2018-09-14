@@ -116,10 +116,12 @@ export default {
    main.homePage h2 {
      margin-top: -4.9rem;
    }
-   main.homeUserPage h2 {
+   main.homeUserPage h2,
+   main.createCoursePage h2 {
      text-shadow: none;
    }
-    main.homeUserPage h2 > span {
+    main.homeUserPage h2 > span,
+    main.createCoursePage h2 > span.courseTitle {
       color: #545050;
       text-shadow: 1px 1px 1px white;
     }
@@ -136,14 +138,16 @@ export default {
   ****** INSCRIPTION / CONNEXION *******
   **************************************/
   form.el-form.connexionForm,
-  form.el-form.inscriptionForm {
+  form.el-form.inscriptionForm,
+  form.el-form.createCourseForm {
     width: 30rem;
     display: block;
     margin: 1rem auto;
     text-align: center;
   }
     form.el-form.connexionForm input,
-    form.el-form.inscriptionForm input {
+    form.el-form.inscriptionForm input,
+    form.el-form.createCourseForm input {
       margin: 0.5rem 0;
       box-shadow: 1.4px 1.4px 4px 0.9px #3f75efb3;
       background-color: white !important;
