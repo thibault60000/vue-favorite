@@ -46,7 +46,7 @@ export default {
     signIn: function () {
       firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.password).then(
         (user) => {
-          this.$router.replace('adminpage')
+          this.$router.replace({path: 'adminpage', query: {inscription: true}})
           this.dialogFormVisible = false
         },
         (err) => {

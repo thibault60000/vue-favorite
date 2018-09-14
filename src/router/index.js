@@ -8,6 +8,7 @@ import Cours from '@/components/Cours'
 import Favorites from '@/components/Favorites'
 import Inscription from '@/components/Inscription'
 import Course from '@/components/Course'
+import CreateCourse from '@/components/CreateCourse'
 
 Vue.use(Router)
 
@@ -46,6 +47,14 @@ let router = new Router({
       path: '/course/:id',
       name: 'Course',
       component: Course,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/createcourse',
+      name: 'CreateCourse',
+      component: CreateCourse,
       meta: {
         requiresAuth: true
       }

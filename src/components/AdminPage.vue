@@ -27,7 +27,7 @@
         </li>
       </ul>
     </div>
-    <el-button type="primary" class="createCourse" icon="el-icon-circle-plus-outline"> Créer un cours </el-button>
+    <router-link class="createCourse" to="/createcourse"> <i class="el-icon-circle-plus-outline" /> Créer un cours </router-link>
   </main>
 </template>
 
@@ -54,17 +54,20 @@ export default {
     }
   },
   mounted () {
-    this.$notify({
-      title: 'Connexion réussie',
-      message: 'Bienvenue sur la page d\'accueil',
-      type: 'success',
-      position: 'bottom-right'
-    })
+    console.log(this.$route.query.inscription)
+    if (this.$route.query.inscription) {
+      this.$notify({
+        title: 'Connexion réussie',
+        message: 'Bienvenue sur la page d\'accueil',
+        type: 'success',
+        position: 'bottom-right'
+      })
+    }
   },
   firestore () {
     return {
       authUser: db.collection('users').doc(firebase.auth().currentUser.uid),
-      courses: db.collection('courses')
+      courses: db.collection('courses').orderBy('createdAt')
     }
   }
 }
@@ -143,14 +146,22 @@ export default {
     padding: 0.2rem 0.3rem;
     border-radius: 3px;
   }
-  button.createCourse.el-button--primary {
+  a.createCourse {
     position: fixed;
     bottom: 1rem;
+    display: inline-block;
+    padding: 0.5rem 0.7rem;
     right: 1rem;
+    border-radius: 3px;
     color: #fff;
     background-color: #3f75ef;
     border-color: #3f75ef;
     font-family: "quicksandregular";
+    text-decoration: none;
+    box-shadow: 2px 2px 5px 1px #b5acaca8;
+  }
+  a.createCourse:hover {
+    background-color: #6591f5;
   }
   @media screen and (max-width: 1000px){
     main.homeUserPage {
@@ -158,7 +169,8 @@ export default {
     }
   }
   @media screen and (max-width: 600px){
-    main.homeUserPage h2:not(.el-notification__title) {
+    main.homeUserPage h2:not(.el-notification__title),
+    main.createCoursePage h2 {
       font-size: 2.4rem;
       letter-spacing: -10.1px;
     }
@@ -174,7 +186,8 @@ export default {
     }
   }
   @media screen and (max-width: 430px){
-    main.homeUserPage h2:not(.el-notification__title) {
+    main.homeUserPage h2:not(.el-notification__title),
+    main.createCoursePage h2 {
       font-size: 2.1rem;
       letter-spacing: -9.5px;
     }
