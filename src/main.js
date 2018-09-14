@@ -20,6 +20,12 @@ Vue.use(ElementUI, { locale })
 Vue.use(Vuefire)
 Vue.use(Vue3dMenu)
 
+const moment = require('moment')
+require('moment/locale/fr')
+Vue.use(require('vue-moment'), {
+  moment
+})
+
 let app
 let config = {
   apiKey: 'AIzaSyCF0eYOihC3rJdVIpiKWPlEVxrbhX-tb2I',

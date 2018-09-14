@@ -18,7 +18,6 @@ export default {
 
 <style>
   @import './assets/fonts/fonts.css';
-
   html {
     display: block;
     width: 100%;
