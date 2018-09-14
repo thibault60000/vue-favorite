@@ -1,6 +1,13 @@
 <template>
   <main class="homeUserPage">
-    <h2>Bonjour <span> {{ authUser.lastname }} </span> <button class="logout" @click="logout"><i class="el-icon-close"></i></button></h2>
+    <h2 class="hello">Bonjour
+      <span> {{ authUser.lastname }} </span>
+      <el-tooltip class="tooltipLogout" effect="dark" content="Se déconnecter" placement="bottom">
+        <button class="logout" @click="logout">
+          <i class="el-icon-close"></i>
+        </button>
+      </el-tooltip>
+    </h2>
     <div class="homeUserPageContent">
       <h3> Voici les derniers cours </h3>
       <ul>
@@ -13,14 +20,14 @@
             <el-rate
               :value="course.rate"
               disabled
-              :colors="['#ef5b42', '#f58827', '#e6a426']"
+              :colors="['#ef5b42', '#f58827', '#ffc107']"
               >
             </el-rate>
           </article>
         </li>
       </ul>
-
     </div>
+    <el-button type="primary" class="createCourse" icon="el-icon-circle-plus-outline"> Créer un cours </el-button>
   </main>
 </template>
 
@@ -45,6 +52,14 @@ export default {
     goToCourse (index) {
       this.$router.push(`course/${index}`)
     }
+  },
+  mounted () {
+    this.$notify({
+      title: 'Connexion réussie',
+      message: 'Bienvenue sur la page d\'accueil',
+      type: 'success',
+      position: 'bottom-right'
+    })
   },
   firestore () {
     return {
@@ -94,9 +109,9 @@ export default {
     margin: 0;
   }
   ul {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(6, auto);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
     margin: 0;
     padding: 0;
   }
@@ -107,11 +122,49 @@ export default {
     padding: 1rem;
     border-radius: 3px;
     cursor: pointer;
+    min-width: 215px;
+    margin: 10px;
   }
   ul li:hover{
     box-shadow: 0px 0px 5px 3px #2196f375;
   }
   p.category {
     text-transform: capitalize
+  }
+  button.createCourse.el-button--primary {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    color: #fff;
+    background-color: #3f75ef;
+    border-color: #3f75ef;
+    font-family: "quicksandregular";
+  }
+  @media screen and (max-width: 1000px){
+    main.homeUserPage {
+      margin-top: 7rem;
+    }
+  }
+  @media screen and (max-width: 600px){
+    main.homeUserPage h2:not(.el-notification__title) {
+      font-size: 2.4rem;
+      letter-spacing: -10.1px;
+    }
+  }
+  @media screen and (max-width: 500px){
+    main.homeUserPage button.logout {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      height: 2rem;
+      width: 2.2rem;
+      font-size: 1.3rem;
+    }
+  }
+  @media screen and (max-width: 430px){
+    main.homeUserPage h2:not(.el-notification__title) {
+      font-size: 2.1rem;
+      letter-spacing: -9.5px;
+    }
   }
 </style>

@@ -32,7 +32,6 @@ export default {
     font: 100%/1.2 "quicksandregular", Helvetica, Arial, sans-serif;
     margin: 0;
     width: 100%;
-    height: 100%;
     background-color: #F9F8F8;
   }
 
@@ -100,7 +99,7 @@ export default {
   @keyframes crt-me{0%{clip:rect(31px,9999px,94px,0)}10%{clip:rect(112px,9999px,76px,0)}20%{clip:rect(85px,9999px,77px,0)}30%{clip:rect(27px,9999px,97px,0)}40%{clip:rect(64px,9999px,98px,0)}50%{clip:rect(61px,9999px,85px,0)}60%{clip:rect(99px,9999px,114px,0)}70%{clip:rect(34px,9999px,115px,0)}80%{clip:rect(98px,9999px,129px,0)}90%{clip:rect(43px,9999px,96px,0)}100%{clip:rect(82px,9999px,64px,0)}}
 
     /* **** H2 **** */
-   h2 {
+    h2:not(.el-notification__title) {
     font-family: 'CoreCircus', sans-serif;
     text-transform: uppercase;
     font-size: 3.2rem;
