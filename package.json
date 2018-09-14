@@ -16,9 +16,11 @@
   "dependencies": {
     "element-ui": "^2.4.6",
     "firebase": "^5.4.0",
+    "moment-timezone": "^0.5.21",
     "vue": "^2.5.2",
     "vue-3d-menu": "^1.0.5",
     "vue-loading-spinner": "^1.0.11",
+    "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
     "vuefire": "^2.0.0-alpha.15"
   },

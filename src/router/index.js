@@ -7,6 +7,7 @@ import firebase from 'firebase'
 import Cours from '@/components/Cours'
 import Favorites from '@/components/Favorites'
 import Inscription from '@/components/Inscription'
+import Course from '@/components/Course'
 
 Vue.use(Router)
 
@@ -37,6 +38,14 @@ let router = new Router({
       path: '/favorites',
       name: 'Favorites',
       component: Favorites,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/course/:id',
+      name: 'Course',
+      component: Course,
       meta: {
         requiresAuth: true
       }
