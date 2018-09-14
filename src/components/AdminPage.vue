@@ -80,8 +80,12 @@ export default {
     -webkit-text-emphasis-style: circle;
     -webkit-text-emphasis-position: under;
   }
+  article {
+    position: relative;
+  }
   article h1 {
     margin: 0;
+    padding: 1rem 0 0.5rem;
     text-transform: uppercase;
     color: #2196F3;
     -webkit-transform: perspective(1px) translateZ(0);
@@ -129,7 +133,15 @@ export default {
     box-shadow: 0px 0px 5px 3px #2196f375;
   }
   p.category {
-    text-transform: capitalize
+    text-transform: capitalize;
+    position: absolute;
+    top: -20px;
+    right: -22px;
+    font-size: 1rem;
+    color: white;
+    background-color: #009688;
+    padding: 0.2rem 0.3rem;
+    border-radius: 3px;
   }
   button.createCourse.el-button--primary {
     position: fixed;
