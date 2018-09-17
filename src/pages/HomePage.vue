@@ -1,11 +1,7 @@
 <template>
   <main class="homePage">
-    <!-- Titre du Futur -->
-    <h1 class="glitched">Bienvenue
-      <div class="glitch-window">
-        <h1 class="glitched">Bienvenue</h1>
-      </div>
-    </h1>
+    <!-- Titre -->
+    <h1 class="glitched">Bienvenue</h1>
     <!-- Sous titre -->
     <h2> Veuillez vous connecter </h2>
     <!-- Formulaire d'inscription -->
@@ -14,7 +10,7 @@
       <el-input type="password" placeholder="Mot de passe" v-model="form.password"></el-input>
       <el-button class="btnConfirmForm" @click="signIn">Se connecter</el-button>
       <!-- Pas encore inscrit ? -->
-      <router-link to='/inscription'>Je souhaite m'inscrire</router-link>
+      <router-link to='/signup'>Je souhaite m'inscrire</router-link>
     </el-form>
   </main>
 </template>

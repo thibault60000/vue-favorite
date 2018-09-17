@@ -31,13 +31,13 @@ export default {
         case 'Accueil':
           /* Si utilisateur existe : la page d'accueil sera AdminPage */
           if (this.userExist) {
-            this.$router.replace('AdminPage')
+            this.$router.replace('landingpage')
           } else {
             this.$router.replace('home')
           }
           break
         case 'Cours':
-          this.$router.replace('cours')
+          this.$router.replace('courses')
           break
         case 'Contact':
           this.$router.replace('contact')

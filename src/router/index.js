@@ -1,14 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import AdminPage from '@/components/AdminPage'
-import Home from '@/components/Home'
+import LandingPage from '@/pages/LandingPage'
+import HomePage from '@/pages/HomePage'
 import firebase from 'firebase'
-import Cours from '@/components/Cours'
-import Favorites from '@/components/Favorites'
-import Inscription from '@/components/Inscription'
-import Course from '@/components/Course'
-import CreateCourse from '@/components/CreateCourse'
+import OneCoursePage from '@/pages/OneCoursePage'
+import SignUpPage from '@/pages/SignUpPage'
+import CoursesPage from '@/pages/CoursesPage'
+import CreateCoursePage from '@/pages/CreateCoursePage'
 
 Vue.use(Router)
 
@@ -25,28 +24,20 @@ let router = new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: HomePage
     },
     {
-      path: '/cours',
+      path: '/courses',
       name: 'Cours',
-      component: Cours,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/favorites',
-      name: 'Favorites',
-      component: Favorites,
+      component: CoursesPage,
       meta: {
         requiresAuth: true
       }
     },
     {
       path: '/course/:id',
-      name: 'Course',
-      component: Course,
+      name: 'Cours',
+      component: OneCoursePage,
       meta: {
         requiresAuth: true
       }
@@ -54,20 +45,20 @@ let router = new Router({
     {
       path: '/createcourse',
       name: 'CreateCourse',
-      component: CreateCourse,
+      component: CreateCoursePage,
       meta: {
         requiresAuth: true
       }
     },
     {
-      path: '/inscription',
+      path: '/signup',
       name: 'Inscription',
-      component: Inscription
+      component: SignUpPage
     },
     {
-      path: '/adminpage',
-      name: 'AdminPage',
-      component: AdminPage,
+      path: '/landingpage',
+      name: 'LandingPage',
+      component: LandingPage,
       meta: {
         requiresAuth: true
       }
@@ -80,7 +71,7 @@ router.beforeEach((to, from, next) => {
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (requiresAuth && !currentUser) next('home')
-  else if (!requiresAuth && currentUser) next('adminpage')
+  else if (!requiresAuth && currentUser) next('landingpage')
   else next()
 })
 

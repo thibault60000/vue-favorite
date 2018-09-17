@@ -84,15 +84,5 @@ export default {
 </script>
 
 <style scoped>
-  div.inscription h2 {
-    margin-top: 1rem;
-  }
-  @media screen and (max-width: 830px) {
-    div.inscription h2 {
-      margin-top: 5rem;
-    }
-  }
-  .el-select {
-    width: 100%;
-  }
+  /* css */
 </style>
