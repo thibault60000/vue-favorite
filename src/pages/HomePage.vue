@@ -1,36 +1,40 @@
 <template>
   <section class="homePage">
-    <!-- Titre de la page -->
-    <h2>Bienvenue</h2>
-    <!-- Bouton ouverture modale connexion -->
-    <el-button type="success" @click="outerVisible = true">Se connecter</el-button>
-    <!-- Modale de connexion -->
-    <el-dialog title="Connexion" :visible.sync="outerVisible">
-      <!-- Sous modale de mot de passe oublié -->
-      <el-dialog
-          width="30%"
-          title="Mot de passe oublié"
-          :visible.sync="innerVisible"
-          append-to-body>
-          <!-- Formulaire mot de passe oublié  -->
-          <el-form :model="forgetForm" autocomplete="off">
-            <el-input placeholder="E-mail" v-model="forgetForm.email"></el-input>
-            <el-button type="warning" @click="forgetPassword">Récupérer son mot de passe</el-button>
-          </el-form>
-      </el-dialog>
-      <!-- Formulaire d'inscription -->
-      <el-form :model="connectForm" class="connexionForm" autocomplete="off">
-        <el-input placeholder="E-mail" v-model="connectForm.email"></el-input>
-        <el-input type="password" placeholder="Mot de passe" v-model="connectForm.password"></el-input>
-        <el-button type="primary" @click="signIn">Se connecter</el-button>
-        <!-- Pas encore inscrit ? -->
-        <router-link to='/signup'>Je souhaite m'inscrire</router-link>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="danger" @click="outerVisible = false">Annuler</el-button>
-        <el-button type="warning" @click="innerVisible = true">Mot de passe oublié ?</el-button>
+    <div class="diagonal-container">
+      <div class="diagonale">
+        <h2>Bienvenue</h2>
       </div>
-    </el-dialog>
+      <!-- Titre de la page -->
+      <!-- Bouton ouverture modale connexion -->
+      <el-button type="success" @click="outerVisible = true">Se connecter</el-button>
+      <!-- Modale de connexion -->
+      <el-dialog title="Connexion" :visible.sync="outerVisible">
+        <!-- Sous modale de mot de passe oublié -->
+        <el-dialog
+            width="30%"
+            title="Mot de passe oublié"
+            :visible.sync="innerVisible"
+            append-to-body>
+            <!-- Formulaire mot de passe oublié  -->
+            <el-form :model="forgetForm" autocomplete="off">
+              <el-input placeholder="E-mail" v-model="forgetForm.email"></el-input>
+              <el-button type="warning" @click="forgetPassword">Récupérer son mot de passe</el-button>
+            </el-form>
+        </el-dialog>
+        <!-- Formulaire d'inscription -->
+        <el-form :model="connectForm" class="connexionForm" autocomplete="off">
+          <el-input placeholder="E-mail" v-model="connectForm.email"></el-input>
+          <el-input type="password" placeholder="Mot de passe" v-model="connectForm.password"></el-input>
+          <el-button type="primary" @click="signIn">Se connecter</el-button>
+          <!-- Pas encore inscrit ? -->
+          <router-link to='/signup'>Je souhaite m'inscrire</router-link>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="danger" @click="outerVisible = false">Annuler</el-button>
+          <el-button type="warning" @click="innerVisible = true">Mot de passe oublié ?</el-button>
+        </div>
+      </el-dialog>
+    </div>
   </section>
 </template>
 
@@ -111,4 +115,14 @@ export default {
   body {
     background: url('../assets/trianglify.svg') center no-repeat;
   }
+  div.diagonal-container {
+    background-color: white;
+    height: calc(50vh - 6rem);
+    display: block;
+    border-radius: 3px;
+    width: 40%;
+    padding: 1rem 0 0 1rem;
+    overflow: hidden;
+  }
+
 </style>
