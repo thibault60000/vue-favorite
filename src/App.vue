@@ -1,11 +1,14 @@
 <template>
   <div id="app">
     <Push right>
-      <router-link to='home'> <span> <font-awesome-icon icon="coffee" /> Accueil </span> </router-link>
-      <router-link to='courses'> <span> Cours </span> </router-link>
-      <router-link to='articles'> <span> Articles </span> </router-link>
+      <router-link to='home'> <span> <font-awesome-icon icon="home" /> Accueil </span> </router-link>
+      <router-link to='courses'> <span> <font-awesome-icon icon="graduation-cap" /> Cours </span> </router-link>
+      <router-link to='articles'> <span> <font-awesome-icon icon="newspaper" /> Articles </span> </router-link>
+      <router-link to='myaccount'> <span> <font-awesome-icon icon="user-circle" /> Mon compte </span> </router-link>
+      <router-link to='signup'> <span> <font-awesome-icon icon="user-plus" /> Inscription </span> </router-link>
     </Push>
     <main id="page-wrap">
+     <Top />
      <router-view/>
     </main>
   </div>
@@ -13,36 +16,20 @@
 
 <script>
 import Push from './components/Push'
+import Top from './components/Top'
 
 export default {
   name: 'App',
   components: {
-    Push
+    Push, Top
   }
 }
 </script>
 
-<style>
+<style lang="scss">
    /* Importer les fonts */
   @import './assets/fonts/fonts.css';
-  /* RESET CSS PAR DEFAULT */
-  html {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  #app {
-    height: 100%;
-    width: 100%;
-    display: block;
-  }
-  body {
-    font: 100%/1.2 "quicksandregular", Helvetica, Arial, sans-serif;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #F9F8F8;
-  }
-  /* Déactiver le focus jaune sur les inputs autocomplete du navigateur */
-  @keyframes autofill{to{color:#000;background:#fff}}input:-webkit-autofill{animation-name:autofill;animation-fill-mode:both}
+  @import './assets/reset.css';
+  /* COULEURS CSS */
+  $bleu-primaire: #2196f3;
 </style>
