@@ -1,5 +1,5 @@
 <template>
-    <main class="createCoursePage">
+    <div class="createCoursePage">
         <h2> Création
           <span v-if="!!this.course.title">du</span>
           <span v-else> de </span>
@@ -12,7 +12,7 @@
         <el-form :model="course" class="createCourseForm" autocomplete="off">
             <el-input placeholder="Titre" v-model="course.title"></el-input>
         </el-form>
-    </main>
+    </div>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
-  <main class="homePage">
+  <main id="page-wrap">
     <!-- Titre de la page -->
-    <h1 class="glitched">Bienvenue</h1>
+    <h1>Bienvenue</h1>
     <!-- Bouton ouverture modale connexion -->
     <el-button type="text" @click="outerVisible = true">Se connecter</el-button>
     <!-- Modale de connexion -->

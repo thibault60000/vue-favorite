@@ -1,5 +1,5 @@
 <template>
-  <main class='inscriptionPage'>
+  <div class='inscriptionPage'>
     <h2> Inscription </h2>
     <el-form :model="form" class="inscriptionForm" autocomplete="off">
       <!-- Mail -->
@@ -31,7 +31,7 @@
       <el-button class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
       <router-link to='/home'>Mince, j'ai deja un compte</router-link>
     </el-form>
-  </main>
+  </div>
 </template>
 
 <script>

@@ -1,14 +1,22 @@
 <template>
   <div id="app">
-    <!-- Mettre le code pour le menu burger ici -->
+    <Push right>
+      <router-link to='home'> <span> Accueil </span> </router-link>
+      <router-link to='courses'> <span> Cours </span> </router-link>
+      <router-link to='articles'> <span> Articles </span> </router-link>
+    </Push>
     <router-view/>
   </div>
 </template>
 
 <script>
+import Push from './components/Push'
 
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Push
+  }
 }
 </script>
 
@@ -30,6 +38,7 @@ export default {
     font: 100%/1.2 "quicksandregular", Helvetica, Arial, sans-serif;
     margin: 0;
     width: 100%;
+    height: 100%;
     background-color: #F9F8F8;
   }
   /* Déactiver le focus jaune sur les inputs autocomplete du navigateur */

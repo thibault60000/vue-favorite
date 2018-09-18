@@ -1,5 +1,5 @@
 <template>
-  <main class="homeUserPage">
+  <div class="homeUserPage">
     <h2 class="hello">Bonjour
       <span> {{ authUser.lastname }} </span>
       <el-tooltip class="tooltipLogout" effect="dark" content="Se déconnecter" placement="bottom">
@@ -28,7 +28,7 @@
       </ul>
     </div>
     <router-link class="createCourse" to="/createcourse"> <i class="el-icon-circle-plus-outline" /> Créer un cours </router-link>
-  </main>
+  </div>
 </template>
 
 <script>

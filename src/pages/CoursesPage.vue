@@ -1,19 +1,13 @@
 <template>
-  <main>
-    <div class="cours">
-        <Menu />
-        <h1> Voici la liste des différents cours proposés </h1>
-    </div>
-  </main>
+  <div class="cours">
+      <h1> Voici la liste des différents cours proposés </h1>
+  </div>
 </template>
 
 <script>
-import Menu from '../components/Menu'
 
 export default {
-  components: {
-    Menu
-  }
+  /* JS */
 }
 </script>
 
