@@ -107,6 +107,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-  /* css */
+<style>
+  body {
+    background: url('../assets/trianglify.svg') center no-repeat;
+  }
 </style>

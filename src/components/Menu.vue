@@ -173,7 +173,7 @@ html {
   cursor: pointer;
 }
 .bm-burger-bars {
-  background-color: white; /* COULEUR DU MENU BURGER */
+  background-color: #353030; /* COULEUR DU MENU BURGER */
 }
 .line-style {
   position: absolute;
@@ -188,7 +188,7 @@ html {
   cursor: pointer;
 }
 .bm-cross {
-  background: #ececec; /* LA CROIX POUR FERMER */
+  background: #353030; /* LA CROIX POUR FERMER */
 }
 .bm-cross-button {
   height: 24px;
@@ -201,16 +201,17 @@ html {
   z-index: 1000;
   top: 0;
   left: 0;
-  background-color: #ce4e4e; /* LE FOND DU MENU */
+  background-color: #f5f5f5; /* LE FOND DU MENU */
   overflow-x: hidden;
   padding-top: 60px;
   transition: 0.5s;
+  box-shadow: -2px -1px 15px 1px #ccc9c9;
 }
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
+.bm-overlay main{
+  filter: blur(5px);
 }
 .bm-item-list {
-  color: #b8b7ad;
+  color: #423c3c;
   margin-left: 10%;
   font-size: 20px;
 }
@@ -221,11 +222,11 @@ html {
 }
 .bm-item-list > * > span:hover {
   text-decoration: underline;
-  text-decoration-color: white;
+  text-decoration-color: #423c3c;
 }
 .bm-item-list > * > span {
   margin-left: 10px;
   font-weight: 700;
-  color: white;
+  color: #423c3c;
 }
 </style>
