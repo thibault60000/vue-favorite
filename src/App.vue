@@ -8,7 +8,6 @@
       <router-link to='signup'> <span> <font-awesome-icon icon="user-plus" /> Inscription </span> </router-link>
     </Push>
     <main id="page-wrap">
-     <Top />
      <router-view/>
     </main>
   </div>
@@ -16,12 +15,11 @@
 
 <script>
 import Push from './components/Push'
-import Top from './components/Top'
 
 export default {
   name: 'App',
   components: {
-    Push, Top
+    Push
   }
 }
 </script>
@@ -32,4 +30,8 @@ export default {
   @import './assets/reset.css';
   /* COULEURS CSS */
   $bleu-primaire: #2196f3;
+
+  form > div.el-input {
+    margin: 1rem 0;
+  }
 </style>
