@@ -1,5 +1,5 @@
 <template>
-  <main id="page-wrap">
+  <div>
     <!-- Titre de la page -->
     <h1>Bienvenue</h1>
     <!-- Bouton ouverture modale connexion -->
@@ -31,7 +31,7 @@
         <el-button type="warning" @click="innerVisible = true">Mot de passe oublié ?</el-button>
       </div>
     </el-dialog>
-  </main>
+  </div>
 </template>
 
 <script>

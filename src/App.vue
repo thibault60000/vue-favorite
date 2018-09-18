@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <Push right>
-      <router-link to='home'> <span> Accueil </span> </router-link>
+      <router-link to='home'> <span> <font-awesome-icon icon="coffee" /> Accueil </span> </router-link>
       <router-link to='courses'> <span> Cours </span> </router-link>
       <router-link to='articles'> <span> Articles </span> </router-link>
     </Push>
-    <router-view/>
+    <main id="page-wrap">
+     <router-view/>
+    </main>
   </div>
 </template>
 
