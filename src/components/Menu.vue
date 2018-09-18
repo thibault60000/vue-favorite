@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="burgerMenu">
+        <!-- LE MENU -->
         <div id="sideNav" class="bm-menu">
             <nav class="bm-item-list">
                 <slot></slot>
@@ -9,11 +10,10 @@
                 </span>
             </span>
         </div>
-
+        <!-- LE BOUTON BURGER -->
         <div class="bm-burger-button" @click="openMenu">
             <span class="bm-burger-bars line-style" :style="{top:20 * (index * 2) + '%'}" v-for="(x, index) in 3" :key="index"></span>
         </div>
-
     </div>
 </template>
 
@@ -173,7 +173,7 @@ html {
   cursor: pointer;
 }
 .bm-burger-bars {
-  background-color: #373a47;
+  background-color: white; /* COULEUR DU MENU BURGER */
 }
 .line-style {
   position: absolute;
@@ -188,23 +188,23 @@ html {
   cursor: pointer;
 }
 .bm-cross {
-  background: #bdc3c7;
+  background: #ececec; /* LA CROIX POUR FERMER */
 }
 .bm-cross-button {
   height: 24px;
   width: 24px;
 }
 .bm-menu {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1000; /* Stay on top */
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
-  background-color: rgb(63, 63, 65); /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /*0.5 second transition effect to slide in the sidenav*/
+  background-color: #ce4e4e; /* LE FOND DU MENU */
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
 }
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);

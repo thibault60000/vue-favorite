@@ -3,7 +3,7 @@
     <!-- Titre de la page -->
     <h1>Bienvenue</h1>
     <!-- Bouton ouverture modale connexion -->
-    <el-button type="text" @click="outerVisible = true">Se connecter</el-button>
+    <el-button type="success" @click="outerVisible = true">Se connecter</el-button>
     <!-- Modale de connexion -->
     <el-dialog title="Connexion" :visible.sync="outerVisible">
       <!-- Sous modale de mot de passe oublié -->
@@ -90,9 +90,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  $color-red: red;
-
-  h1 {
-    color: $color-red;
-  }
+  /* css */
 </style>
