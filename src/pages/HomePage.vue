@@ -89,6 +89,10 @@ export default {
 }
 </script>
 
-<style scoped>
-  /* css */
+<style scoped lang="scss">
+  $color-red: red;
+
+  h1 {
+    color: $color-red;
+  }
 </style>
