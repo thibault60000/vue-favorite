@@ -219,6 +219,10 @@ html {
   text-decoration: none;
   padding: 0.7em;
 }
+.bm-item-list > * > span:hover {
+  text-decoration: underline;
+  text-decoration-color: white;
+}
 .bm-item-list > * > span {
   margin-left: 10px;
   font-weight: 700;

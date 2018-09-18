@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <section class="homePage">
     <!-- Titre de la page -->
-    <h1>Bienvenue</h1>
+    <h2>Bienvenue</h2>
     <!-- Bouton ouverture modale connexion -->
     <el-button type="success" @click="outerVisible = true">Se connecter</el-button>
     <!-- Modale de connexion -->
@@ -31,7 +31,7 @@
         <el-button type="warning" @click="innerVisible = true">Mot de passe oublié ?</el-button>
       </div>
     </el-dialog>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -51,7 +51,8 @@ export default {
       authUser: null,
       user: '',
       outerVisible: false,
-      innerVisible: false
+      innerVisible: false,
+      countErrorPassword: 0
     }
   },
   created () {
@@ -70,7 +71,24 @@ export default {
           this.innerVisible = false
         },
         (err) => {
-          alert('Oops. ' + err.message)
+          /* Si on se trompe de mot de passe ou email au moins 3 fois */
+          console.log(err)
+          if (this.countErrorPassword > 2) {
+            this.innerVisible = true
+            this.$notify.error({
+              title: 'Trop de tentatives',
+              message: 'Si vous avez oublié votre mot de passe, remplissez ce formulaire'
+            })
+          } else {
+            /* Si on se trompe de mot de passe ou email moins de 3 fois */
+            this.countErrorPassword++
+            this.$notify.error({
+              title: 'Erreur',
+              message: 'E-mail ou mot de passe incorrect'
+            })
+          }
+          this.connectForm.email = ''
+          this.connectForm.password = ''
         }
       )
     },
