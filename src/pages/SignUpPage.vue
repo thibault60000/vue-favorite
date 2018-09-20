@@ -2,11 +2,13 @@
   <section class='signUpPage'>
     <h2> Inscription </h2>
     <el-form :model="form" class="inscriptionForm" autocomplete="off">
+      <p> Attention le choix de <strong> Statut </strong> impactera votre expérience sur le site </p>
+      <br>
       <!-- Statut -->
       <el-form-item label="Statut*">
+        <el-radio v-model="form.statut" label="Autre" border>Utilisateur Standard</el-radio>
         <el-radio v-model="form.statut" label="Etudiant" border>Etudiant</el-radio>
         <el-radio v-model="form.statut" label="Professeur" border>Professeur</el-radio>
-        <el-radio v-model="form.statut" label="Autre" border>Autre</el-radio>
       </el-form-item>
       <!-- Mail -->
       <el-form-item label="E-mail*">
@@ -60,6 +62,7 @@ export default {
         email: '',
         password: '',
         statut: '',
+        etablissement: '',
         name: '',
         lastname: '',
         birthday: ''
@@ -133,7 +136,7 @@ export default {
                 id: object.user.uid,
                 email: this.form.email,
                 statut: this.form.statut,
-                etablissment: this.form.etablissment,
+                etablissment: this.form.etablissement,
                 niveauScolaire: this.form.niveauScolaire,
                 name: this.form.name,
                 lastname: this.form.lastname,

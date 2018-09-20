@@ -4,9 +4,10 @@
       <div class="diagonale">
         <h2>Bienvenue</h2>
       </div>
-      <!-- Titre de la page -->
       <!-- Bouton ouverture modale connexion -->
       <el-button type="success" @click="outerVisible = true">Se connecter</el-button>
+      <!-- Pas encore inscrit ? -->
+      <router-link to='/signup'>Je souhaite m'inscrire</router-link>
       <!-- Modale de connexion -->
       <el-dialog title="Connexion" :visible.sync="outerVisible">
         <!-- Sous modale de mot de passe oublié -->
@@ -112,17 +113,5 @@ export default {
 </script>
 
 <style>
-  body {
-    background: url('../assets/trianglify.svg') center no-repeat;
-  }
-  div.diagonal-container {
-    background-color: white;
-    height: calc(50vh - 6rem);
-    display: block;
-    border-radius: 3px;
-    width: 40%;
-    padding: 1rem 0 0 1rem;
-    overflow: hidden;
-  }
-
+/* css */
 </style>
