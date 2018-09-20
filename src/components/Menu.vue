@@ -171,9 +171,10 @@ html {
   left: 36px;
   top: 36px;
   cursor: pointer;
+  z-index: 999;
 }
 .bm-burger-bars {
-  background-color: #353030; /* COULEUR DU MENU BURGER */
+  background-color: #ffffff; /* COULEUR DU MENU BURGER */
 }
 .line-style {
   position: absolute;

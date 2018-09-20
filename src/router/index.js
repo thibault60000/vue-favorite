@@ -8,6 +8,7 @@ import OneCoursePage from '@/pages/OneCoursePage'
 import SignUpPage from '@/pages/SignUpPage'
 import CoursesPage from '@/pages/CoursesPage'
 import CreateCoursePage from '@/pages/CreateCoursePage'
+import MyAccountPage from '@/pages/MyAccountPage'
 
 Vue.use(Router)
 
@@ -38,6 +39,14 @@ let router = new Router({
       path: '/course/:id',
       name: 'Cours',
       component: OneCoursePage,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/myaccount',
+      name: 'MonCompte',
+      component: MyAccountPage,
       meta: {
         requiresAuth: true
       }
