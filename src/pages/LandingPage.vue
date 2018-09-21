@@ -1,6 +1,7 @@
 <template>
-  <section class="homeUserPage">
-    <h2 class="hello">Bonjour
+  <section>
+    <!-- Titre de la page -->
+    <h2>Bonjour
       <span> {{ authUser.lastname }} </span>
       <el-tooltip class="tooltipLogout" effect="dark" content="Se déconnecter" placement="bottom">
         <button class="logout" @click="logout">
@@ -8,9 +9,10 @@
         </button>
       </el-tooltip>
     </h2>
-    <div class="homeUserPageContent">
+    <!-- Les derniers cours -->
+    <div class="lastCourses">
       <h3> Voici les derniers cours </h3>
-      <ul>
+      <ul class="lastCoursesList">
         <li v-for="(course, id) in courses" :key="id" @click="goToCourse(id)">
           <article>
             <h1> {{ course.title }} </h1>
@@ -27,7 +29,24 @@
         </li>
       </ul>
     </div>
-    <router-link class="createCourse" to="/createcourse"> <i class="el-icon-circle-plus-outline" /> Créer un cours </router-link>
+    <!-- Les derniers articles -->
+    <div class="lastArticles">
+      <h3> Voici les derniers articles </h3>
+      <ul class="lastArticlesList">
+        <li v-for="(article, id) in articles" :key="id">
+          <article>
+            <h1> {{ article.title }} </h1>
+            <p class="category"> {{ article.category }} </p>
+          </article>
+        </li>
+      </ul>
+    </div>
+    <div class="createList">
+      <ul>
+        <li><router-link class="createCourse" to="/createcourse"> <i class="el-icon-circle-plus-outline" /> Créer un cours </router-link></li>
+        <li><router-link class="createArticle" to="/createarticle"> <i class="el-icon-circle-plus-outline" /> Créer un article </router-link></li>
+      </ul>
+    </div>
   </section>
 </template>
 
@@ -40,7 +59,8 @@ export default {
   data () {
     return {
       authUser: '',
-      courses: []
+      courses: [],
+      articles: []
     }
   },
   methods: {
@@ -53,26 +73,61 @@ export default {
       this.$router.push(`course/${index}`)
     }
   },
-  mounted () {
-    console.log(this.$route.query.inscription)
-    if (this.$route.query.inscription) {
-      this.$notify({
-        title: 'Connexion réussie',
-        message: 'Bienvenue sur la page d\'accueil',
-        type: 'success',
-        position: 'bottom-right'
-      })
-    }
-  },
   firestore () {
     return {
       authUser: db.collection('users').doc(firebase.auth().currentUser.uid),
-      courses: db.collection('courses').orderBy('createdAt')
+      courses: db.collection('courses').orderBy('createdAt').limit(5),
+      articles: db.collection('articles').limit(3)
     }
   }
 }
 </script>
 
 <style scoped>
-  /* CSS */
+  h3 {
+    margin: 1rem 0;
+    color: #3a8ee6;
+    font-size: 1.2rem;
+  }
+  .lastArticlesList li,
+  .lastCoursesList li {
+    background-color: #332e2e;
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 4px 4px 6px 1px #b7b0b0;
+    margin: 0.8rem 0;
+  }
+  .createList {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 0.5rem;
+  }
+    .createList li {
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+      .createList li a {
+        text-decoration: none;
+        padding: 0.5rem;
+        border-radius: 5px;
+        border-radius: 5px;
+        color: #ffffff;
+        box-shadow: 2px 2px 5px 1px #675b5bad;
+      }
+        .createList li a.createCourse {
+          background-color: #F44336;
+        }
+        .createList li a.createArticle {
+          background-color: #4CAF50;
+        }
+    button.logout {
+      background-color: #332e2e;
+      color: white;
+      border: none;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      vertical-align: bottom;
+      line-height: 1.4rem;
+    }
 </style>

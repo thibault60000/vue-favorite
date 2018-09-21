@@ -6,7 +6,7 @@
       <router-link to='courses'> <span> <font-awesome-icon icon="graduation-cap" /> Cours </span> </router-link>
       <router-link to='articles'> <span> <font-awesome-icon icon="newspaper" /> Articles </span> </router-link>
       <router-link v-if="authUserExist" to='myaccount'> <span> <font-awesome-icon icon="user-circle" /> Mon compte </span> </router-link>
-      <router-link v-if="authUserExist" to='signup'> <span> <font-awesome-icon icon="user-plus" /> Inscription </span> </router-link>
+      <router-link v-if="!authUserExist" to='signup'> <span> <font-awesome-icon icon="user-plus" /> Inscription </span> </router-link>
       <p v-if="authUserExist" @click="logout"> <span> Déconnexion </span> </p>
     </Push>
     <!-- CONTENU PRINCIPAL -->
@@ -25,22 +25,10 @@ export default {
   components: {
     Push
   },
-  data () {
-    return {
-      authUser: ''
-    }
-  },
   computed: {
     /* Converti en booléen l'existance ou non d'un utilisateur authentifié */
     authUserExist () {
-      return !!this.authUser
-    }
-  },
-  created () {
-    /* Récupère l'utilisateur connecté si c'est le cas */
-    if (firebase.auth().currentUser) {
-      this.authUser = firebase.auth().currentUser
-      console.log(this.authUser)
+      return !!firebase.auth().currentUser
     }
   },
   methods: {
