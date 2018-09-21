@@ -3,11 +3,6 @@
     <!-- Titre de la page -->
     <h2>Bonjour
       <span> {{ authUser.lastname }} </span>
-      <el-tooltip class="tooltipLogout" effect="dark" content="Se déconnecter" placement="bottom">
-        <button class="logout" @click="logout">
-          <i class="el-icon-close"></i> Se déconnecter
-        </button>
-      </el-tooltip>
     </h2>
     <!-- Les derniers cours -->
     <div class="lastCourses">
@@ -64,11 +59,6 @@ export default {
     }
   },
   methods: {
-    logout () {
-      firebase.auth().signOut().then(() => {
-        this.$router.replace('login')
-      })
-    },
     goToCourse (index) {
       this.$router.push(`course/${index}`)
     }
@@ -121,13 +111,4 @@ export default {
         .createList li a.createArticle {
           background-color: #4CAF50;
         }
-    button.logout {
-      background-color: #332e2e;
-      color: white;
-      border: none;
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-      vertical-align: bottom;
-      line-height: 1.4rem;
-    }
 </style>
