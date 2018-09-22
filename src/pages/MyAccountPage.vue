@@ -3,7 +3,7 @@
         <h1> Bienvenue sur ton compte <strong> {{ authUser.lastname }} </strong> </h1>
         <!-- FORMULAIRE AVEC DATA DISABLED -->
         <el-form>
-            <img ref="profilPhoto" />
+            <img class="profilImg" ref="profilPhoto" />
             <!-- EMAIL -->
             <el-form-item label="Email actuel">
                 <el-input
@@ -68,6 +68,8 @@
 <script>
 import firebase from 'firebase'
 import { db, st } from '../main'
+import avatarH from '@/assets/avatarhomme.png'
+import avatarF from '@/assets/avatarfemme.png'
 
 export default {
   data () {
@@ -94,7 +96,6 @@ export default {
       return !!this.form.lastname
     },
     birthdayDate () {
-      console.log(this.authUser.birthday.seconds)
       return this.authUser.birthday.seconds
     }
   },
@@ -182,12 +183,27 @@ export default {
       authUser: db.collection('users').doc(firebase.auth().currentUser.uid)
     }
   },
-  created () {
-    st.child('images/f4UkBMC3zHMOs66FyMRFwbXmw0p1/photo de profil').getDownloadURL().then((url) => {
-      this.$refs.profilPhoto.src = url
-    }).catch((error) => {
-      console.log(error)
-    })
+  updated () {
+    /* Met à jour la photo de profil */
+    if (this.authUser.avatar) {
+      if (this.authUser.gender === 'Masculin') {
+        this.$refs.profilPhoto.src = avatarH
+      } else {
+        this.$refs.profilPhoto.src = avatarF
+      }
+    } else {
+      st.child('images').child(firebase.auth().currentUser.uid).child('photo de profil').getDownloadURL().then((url) => {
+        this.$refs.profilPhoto.src = url
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>
+
+<style>
+  img.profilImg {
+    max-width: 100px;
+  }
+</style>

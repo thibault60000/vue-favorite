@@ -25,11 +25,22 @@ export default {
   components: {
     Push
   },
+  data () {
+    return {
+      authUser: ''
+    }
+  },
   computed: {
     /* Converti en booléen l'existance ou non d'un utilisateur authentifié */
     authUserExist () {
-      return !!firebase.auth().currentUser
+      return !!this.authUser
     }
+  },
+  created () {
+    this.authUser = firebase.auth().currentUser
+  },
+  updated () {
+    this.authUser = firebase.auth().currentUser
   },
   methods: {
     logout () {
