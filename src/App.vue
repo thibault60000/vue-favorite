@@ -6,8 +6,8 @@
       <router-link to='courses'> <span> <font-awesome-icon icon="graduation-cap" /> Cours </span> </router-link>
       <router-link to='articles'> <span> <font-awesome-icon icon="newspaper" /> Articles </span> </router-link>
       <router-link v-if="authUserExist" to='myaccount'> <span> <font-awesome-icon icon="user-circle" /> Mon compte </span> </router-link>
-      <router-link v-if="!authUserExist" to='signup'> <span> <font-awesome-icon icon="user-plus" /> Inscription </span> </router-link>
-      <p v-if="authUserExist" @click="logout"> <span> Déconnexion </span> </p>
+      <router-link class="registerLink" v-if="!authUserExist" to='signup'> <span> <font-awesome-icon icon="user-plus" /> Inscription </span> </router-link>
+      <p class="logoutLink" v-if="authUserExist" @click="logout"> <span> <font-awesome-icon icon="door-open" /> Déconnexion </span> </p>
     </Push>
     <!-- CONTENU PRINCIPAL -->
     <main id="page-wrap">
@@ -94,5 +94,17 @@ export default {
   }
   .el-radio-group {
     margin: 0 0 1rem;
+  }
+  p.logoutLink span {
+    color: #e85858;
+  }
+  p.logoutLink span:hover {
+    text-decoration-color: #e85858;
+  }
+  a.registerLink span {
+    color: #4CAF50;
+  }
+  a.registerLink span:hover {
+    text-decoration-color: #4CAF50;
   }
 </style>
