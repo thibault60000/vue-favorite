@@ -37,7 +37,7 @@ let router = new Router({
     },
     {
       path: '/course/:id',
-      name: 'Cours',
+      name: 'Le cours',
       component: OneCoursePage,
       meta: {
         requiresAuth: true

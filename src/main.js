@@ -12,6 +12,7 @@ import 'firebase/firestore'
 
 import App from './App'
 import router from './router'
+import VueResource from 'vue-resource'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -23,6 +24,12 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale })
 Vue.use(Vuefire)
+Vue.use(VueResource)
+
+Vue.http.headers.common['Content-Type'] = 'application/json'
+Vue.http.headers.common['Access-Control-Allow-Origin'] = '*'
+Vue.http.headers.common['Accept'] = 'application/json, text/plain, */*'
+Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'
 
 const moment = require('moment')
 require('moment/locale/fr')
@@ -56,5 +63,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 /* Firestore */
 export const db = firebase.firestore()
+export const st = firebase.storage().ref()
+
 const settings = {timestampsInSnapshots: true}
 db.settings(settings)

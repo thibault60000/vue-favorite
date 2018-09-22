@@ -4,6 +4,15 @@
     <el-form :model="form" class="inscriptionForm" autocomplete="off">
       <p> Attention le choix de <strong> Statut </strong> impactera votre expérience sur le site </p>
       <br>
+      <!-- IMAGE DE PROFIL -->
+      <p>Image de profil (non obligatoire)</p>
+      <div class="file-upload-form">
+          <el-button type="primary"> Ajouter une image </el-button>
+          <input type="file" @change="previewImage" accept="image/*">
+      </div>
+      <div class="image-preview" v-if="imageData.length > 0">
+          <img class="preview" :src="imageData">
+      </div>
       <!-- Statut -->
       <el-form-item label="Statut*">
         <el-radio v-model="form.statut" label="Autre" border>Utilisateur Standard</el-radio>
@@ -43,7 +52,9 @@
           <el-date-picker type="date" placeholder="Selectionnez une date" v-model="form.birthday"></el-date-picker>
       </el-form-item>
       <!-- Bouton validation -->
-      <el-button class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
+      <el-button v-if="this.form.statut === 'Etudiant'" :disabled="studentFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
+      <el-button v-if="this.form.statut === 'Professeur'" :disabled="professeurFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
+      <el-button v-if="this.form.statut === 'Autre'" :disabled="autreFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
       <!-- Lien d'inscription -->
       <router-link to='/home'>Mince, j'ai deja un compte</router-link>
     </el-form>
@@ -52,17 +63,20 @@
 
 <script>
 import firebase from 'firebase'
-import { db } from '../main'
+import { db, st } from '../main'
 
 export default {
   name: 'signUp',
   data: function () {
     return {
+      imageData: '',
+      avatarImg: '',
       form: {
         email: '',
         password: '',
         statut: '',
-        etablissement: '',
+        etablissement: 'non specifié',
+        niveauScolaire: [],
         name: '',
         lastname: '',
         birthday: ''
@@ -117,12 +131,32 @@ export default {
   computed: {
     statutOfUser () {
       return this.form.statut
+    },
+    studentFormComplete () {
+      return !this.form.email || !this.form.password || !this.form.name || !this.form.lastname || !this.form.birthday || !this.avatarImg || !this.form.etablissement || !this.form.niveauScolaire
+    },
+    professeurFormComplete () {
+      return !this.form.email || !this.form.password || !this.form.name || !this.form.lastname || !this.form.birthday || !this.avatarImg || !this.form.etablissement
+    },
+    autreFormComplete () {
+      return !this.form.email || !this.form.password || !this.form.name || !this.form.lastname || !this.form.birthday || !this.avatarImg
     }
   },
   created () {
     this.form.statut = 'Autre'
   },
   methods: {
+    previewImage: function (event) {
+      var input = event.target
+      if (input.files && input.files[0]) {
+        this.avatarImg = input.files[0]
+        var reader = new FileReader()
+        reader.onload = (e) => {
+          this.imageData = e.target.result
+        }
+        reader.readAsDataURL(input.files[0])
+      }
+    },
     signUp: function () {
       /* SI L'UTILISATEUR EST UN ETUDIANT */
       if (this.statutOfUser === 'Etudiant') {
@@ -131,7 +165,6 @@ export default {
           .createUserWithEmailAndPassword(this.form.email, this.form.password)
           .then(
             object => {
-              console.log(object)
               db.collection('users').doc(object.user.uid).set({
                 id: object.user.uid,
                 email: this.form.email,
@@ -141,8 +174,9 @@ export default {
                 name: this.form.name,
                 lastname: this.form.lastname,
                 birthday: this.form.birthday
-              }).then(function (docRef) {
-                console.log('Nouvel utilisateur créé, ID : ', docRef.id)
+              }).then(() => {
+                var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
+                storageImageRef.put(this.avatarImg)
               }).catch(function (error) {
                 console.error('Erreur pendant la création : ', error)
               })
@@ -159,7 +193,6 @@ export default {
           .createUserWithEmailAndPassword(this.form.email, this.form.password)
           .then(
             object => {
-              console.log(object)
               db.collection('users').doc(object.user.uid).set({
                 id: object.user.uid,
                 email: this.form.email,
@@ -168,8 +201,9 @@ export default {
                 name: this.form.name,
                 lastname: this.form.lastname,
                 birthday: this.form.birthday
-              }).then(function (docRef) {
-                console.log('Nouvel utilisateur créé, ID : ', docRef.id)
+              }).then(() => {
+                var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
+                storageImageRef.put(this.avatarImg)
               }).catch(function (error) {
                 console.error('Erreur pendant la création : ', error)
               })
@@ -186,7 +220,6 @@ export default {
           .createUserWithEmailAndPassword(this.form.email, this.form.password)
           .then(
             object => {
-              console.log(object)
               db.collection('users').doc(object.user.uid).set({
                 id: object.user.uid,
                 email: this.form.email,
@@ -194,8 +227,9 @@ export default {
                 name: this.form.name,
                 lastname: this.form.lastname,
                 birthday: this.form.birthday
-              }).then(function (docRef) {
-                console.log('Nouvel utilisateur créé, ID : ', docRef.id)
+              }).then(() => {
+                var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
+                storageImageRef.put(this.avatarImg)
               }).catch(function (error) {
                 console.error('Erreur pendant la création : ', error)
               })
@@ -211,6 +245,23 @@ export default {
 }
 </script>
 
-<style scoped>
-  /* css */
+<style>
+  img.preview {
+      width: 200px;
+      background-color: white;
+      border: 1px solid #DDD;
+      padding: 5px;
+  }
+  .file-upload-form {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+    .file-upload-form input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
 </style>

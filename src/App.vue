@@ -49,8 +49,8 @@ export default {
   form > div.el-input {
     margin: 1rem 0;
   }
-  input.el-input__inner {
-    max-width: 50%;
+  :not(.el-input--suffix) > input.el-input__inner {
+    max-width: 70%;
   }
   /* VARIABLES CSS */
   $blue: #3a8ee6;
