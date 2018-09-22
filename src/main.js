@@ -16,9 +16,9 @@ import VueResource from 'vue-resource'
 
 /* Font Awesome */
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHome, faUserCircle, faGraduationCap, faNewspaper, faUserPlus, faGrinBeamSweat } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faUserCircle, faGraduationCap, faNewspaper, faUserPlus, faGrinBeamSweat, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faHome, faUserCircle, faGraduationCap, faNewspaper, faUserPlus, faGrinBeamSweat)
+library.add(faHome, faUserCircle, faGraduationCap, faNewspaper, faUserPlus, faGrinBeamSweat, faDoorOpen)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

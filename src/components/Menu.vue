@@ -206,7 +206,7 @@ html {
   overflow-x: hidden;
   padding-top: 60px;
   transition: 0.5s;
-  box-shadow: -2px -1px 15px 1px #ccc9c9;
+  box-shadow: -2px -1px 8px 1px #f5f5f5;
 }
 .bm-overlay main{
   filter: blur(5px);
