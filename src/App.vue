@@ -74,4 +74,14 @@ export default {
     width: calc(100% - 4rem);
     height: calc(100% - 4rem);
   }
+  .el-form-item__label {
+    text-align: left !important;
+    display: block !important;
+    position: static !important;
+    float: none !important;
+    font-family: "quicksandbold";
+  }
+  .el-radio-group {
+    margin: 0 0 1rem;
+  }
 </style>

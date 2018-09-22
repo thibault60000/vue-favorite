@@ -3,6 +3,7 @@
         <h1> Bienvenue sur ton compte <strong> {{ authUser.lastname }} </strong> </h1>
         <!-- FORMULAIRE AVEC DATA DISABLED -->
         <el-form>
+            <img ref="profilPhoto" />
             <!-- EMAIL -->
             <el-form-item label="Email actuel">
                 <el-input
@@ -66,7 +67,7 @@
 
 <script>
 import firebase from 'firebase'
-import { db } from '../main'
+import { db, st } from '../main'
 
 export default {
   data () {
@@ -180,6 +181,13 @@ export default {
     return {
       authUser: db.collection('users').doc(firebase.auth().currentUser.uid)
     }
+  },
+  created () {
+    st.child('images/f4UkBMC3zHMOs66FyMRFwbXmw0p1/photo de profil').getDownloadURL().then((url) => {
+      this.$refs.profilPhoto.src = url
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 }
 </script>

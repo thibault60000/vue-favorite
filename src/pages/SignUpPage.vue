@@ -2,19 +2,35 @@
   <section class='signUpPage'>
     <h2> Inscription </h2>
     <el-form :model="form" class="inscriptionForm" autocomplete="off">
-      <p> Attention le choix de <strong> Statut </strong> impactera votre expérience sur le site </p>
-      <br>
       <!-- IMAGE DE PROFIL -->
-      <p>Image de profil (non obligatoire)</p>
-      <div class="file-upload-form">
-          <el-button type="primary"> Ajouter une image </el-button>
-          <input type="file" @change="previewImage" accept="image/*">
-      </div>
-      <div class="image-preview" v-if="imageData.length > 0">
-          <img class="preview" :src="imageData">
-      </div>
+      <el-form-item label="Image de profil*">
+        <!-- Choix entre vraie photo de profil ou avatar  -->
+        <el-switch
+          @change="needPhotoChange"
+          class="switchImageChoose"
+          style="display: block"
+          v-model="needImage"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+          active-text="Photo"
+          inactive-text="Avatar">
+        </el-switch>
+        <!-- Choix du genre de l'avatar si pas de vraie photo de profil -->
+        <el-radio-group v-if="!needImage" @change="onChangeGender" v-model="avatarGender">
+          <el-radio-button label="Masculin"></el-radio-button>
+          <el-radio-button label="Féminin"></el-radio-button>
+        </el-radio-group>
+        <!-- Vraie image de profil -->
+        <div v-if="needImage" class="file-upload-form">
+            <el-button type="primary"> Ajouter une image </el-button>
+            <input type="file" @change="previewImage" accept="image/*">
+        </div>
+        <div class="image-preview" v-if="imageData.length > 0">
+            <img class="preview" :src="imageData">
+        </div>
+      </el-form-item>
       <!-- Statut -->
-      <el-form-item label="Statut*">
+      <el-form-item label="Vous êtes un :">
         <el-radio v-model="form.statut" label="Autre" border>Utilisateur Standard</el-radio>
         <el-radio v-model="form.statut" label="Etudiant" border>Etudiant</el-radio>
         <el-radio v-model="form.statut" label="Professeur" border>Professeur</el-radio>
@@ -56,7 +72,7 @@
       <el-button v-if="this.form.statut === 'Professeur'" :disabled="professeurFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
       <el-button v-if="this.form.statut === 'Autre'" :disabled="autreFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
       <!-- Lien d'inscription -->
-      <router-link to='/home'>Mince, j'ai deja un compte</router-link>
+      <router-link class="noAccountLink" to='/home'>  Oooups <font-awesome-icon icon="grin-beam-sweat" /> J'ai deja un compte !</router-link>
     </el-form>
   </section>
 </template>
@@ -64,6 +80,8 @@
 <script>
 import firebase from 'firebase'
 import { db, st } from '../main'
+import avatarH from '@/assets/avatarhomme.png'
+import avatarF from '@/assets/avatarfemme.png'
 
 export default {
   name: 'signUp',
@@ -71,6 +89,8 @@ export default {
     return {
       imageData: '',
       avatarImg: '',
+      needImage: true,
+      avatarGender: '',
       form: {
         email: '',
         password: '',
@@ -140,12 +160,35 @@ export default {
     },
     autreFormComplete () {
       return !this.form.email || !this.form.password || !this.form.name || !this.form.lastname || !this.form.birthday || !this.avatarImg
+    },
+    avatarGenderChange () {
+      return this.avatarGender
     }
   },
   created () {
     this.form.statut = 'Autre'
+    this.avatarGender = 'Masculin'
   },
   methods: {
+    /* FONCTION LORSQUE L'ON CHANGE LE GENRE DE L'AVATAR */
+    onChangeGender () {
+      if (this.avatarGender === 'Masculin') {
+        this.avatarImg = avatarH
+      } else if (this.avatarGender === 'Féminin') {
+        this.avatarImg = avatarF
+      }
+      this.imageData = this.avatarImg
+    },
+    /* FONCTION LORSQUE L'ON PASSE DE PHOTO DE PROFIL A PHOTO D'AVATAR */
+    needPhotoChange () {
+      if (this.needImage === false) {
+        this.avatarImg = avatarH
+        this.imageData = this.avatarImg
+      } else {
+        this.imageData = ''
+      }
+    },
+    /* FONCTION D'APERCU DE L'IMAGE DE PROFIL */
     previewImage: function (event) {
       var input = event.target
       if (input.files && input.files[0]) {
@@ -157,6 +200,7 @@ export default {
         reader.readAsDataURL(input.files[0])
       }
     },
+    /* FONCTION D'INSCRIPTION AU SITE */
     signUp: function () {
       /* SI L'UTILISATEUR EST UN ETUDIANT */
       if (this.statutOfUser === 'Etudiant') {
@@ -175,8 +219,15 @@ export default {
                 lastname: this.form.lastname,
                 birthday: this.form.birthday
               }).then(() => {
-                var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
-                storageImageRef.put(this.avatarImg)
+                if (!this.needImage) {
+                  db.collection('users').doc(object.user.uid).set({
+                    avatar: true,
+                    gender: this.avatarGender
+                  }, { merge: true })
+                } else {
+                  var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
+                  storageImageRef.put(this.avatarImg)
+                }
               }).catch(function (error) {
                 console.error('Erreur pendant la création : ', error)
               })
@@ -202,8 +253,15 @@ export default {
                 lastname: this.form.lastname,
                 birthday: this.form.birthday
               }).then(() => {
-                var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
-                storageImageRef.put(this.avatarImg)
+                if (!this.needImage) {
+                  db.collection('users').doc(object.user.uid).set({
+                    avatar: true,
+                    gender: this.avatarGender
+                  }, { merge: true })
+                } else {
+                  var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
+                  storageImageRef.put(this.avatarImg)
+                }
               }).catch(function (error) {
                 console.error('Erreur pendant la création : ', error)
               })
@@ -228,8 +286,15 @@ export default {
                 lastname: this.form.lastname,
                 birthday: this.form.birthday
               }).then(() => {
-                var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
-                storageImageRef.put(this.avatarImg)
+                if (!this.needImage) {
+                  db.collection('users').doc(object.user.uid).set({
+                    avatar: true,
+                    gender: this.avatarGender
+                  }, { merge: true })
+                } else {
+                  var storageImageRef = st.child('images/' + object.user.uid + '/photo de profil')
+                  storageImageRef.put(this.avatarImg)
+                }
               }).catch(function (error) {
                 console.error('Erreur pendant la création : ', error)
               })
@@ -264,4 +329,21 @@ export default {
       top: 0;
       opacity: 0;
     }
+  /* COULEUR DU SWITCH */
+  .el-switch__label.is-active.el-switch__label--left {
+    color: #ff4949;
+  }
+    .el-switch__label.is-active.el-switch__label--right {
+    color: #13ce66;
+  }
+  .el-switch.switchImageChoose {
+    display: block;
+    margin: 0.2rem 0 1.2rem;
+  }
+  a.noAccountLink {
+    display: block;
+    margin-top: 1rem;
+    font-family: "quicksandbold";
+    color: #463e3e;
+  }
 </style>
