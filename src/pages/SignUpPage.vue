@@ -30,7 +30,7 @@
         </div>
       </el-form-item>
       <!-- Statut -->
-      <el-form-item label="Vous êtes un :">
+      <el-form-item class="statutFormItem" label="Vous êtes un :">
         <el-radio v-model="form.statut" label="Autre" border>Utilisateur Standard</el-radio>
         <el-radio v-model="form.statut" label="Etudiant" border>Etudiant</el-radio>
         <el-radio v-model="form.statut" label="Professeur" border>Professeur</el-radio>
@@ -41,7 +41,7 @@
       </el-form-item>
       <!-- Etablissement -->
       <el-form-item v-if="statutOfUser == 'Etudiant' || statutOfUser == 'Professeur' " label="Etablissement*">
-        <el-input label="etablissement" placeholder="Nom de l'école / collège / lycée / université ..." v-model="form.etablissement"></el-input>
+        <el-input label="etablissement" placeholder="Etablissement scolaire" v-model="form.etablissement"></el-input>
       </el-form-item>
       <!-- Niveau scolaire -->
       <el-form-item v-if="statutOfUser == 'Etudiant'" label="Niveau scolaire*">
@@ -68,12 +68,14 @@
           <el-date-picker type="date" placeholder="Selectionnez une date" v-model="form.birthday"></el-date-picker>
       </el-form-item>
       <!-- Bouton validation -->
-      <el-button v-if="this.form.statut === 'Etudiant'" :disabled="studentFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
-      <el-button v-if="this.form.statut === 'Professeur'" :disabled="professeurFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
-      <el-button v-if="this.form.statut === 'Autre'" :disabled="autreFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
+      <el-form-item class="validationBtn">
+        <el-button v-if="this.form.statut === 'Etudiant'" :disabled="studentFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
+        <el-button v-if="this.form.statut === 'Professeur'" :disabled="professeurFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
+        <el-button v-if="this.form.statut === 'Autre'" :disabled="autreFormComplete" class="btnConfirmForm" @click="signUp">S'inscrire</el-button>
+      </el-form-item>
       <!-- Lien d'inscription -->
-      <router-link class="noAccountLink" to='/home'>  Oooups <font-awesome-icon icon="grin-beam-sweat" /> J'ai deja un compte !</router-link>
     </el-form>
+    <router-link class="noAccountLink" to='/home'>  Oooups <font-awesome-icon icon="grin-beam-sweat" /> J'ai deja un compte !</router-link>
   </section>
 </template>
 
@@ -95,7 +97,7 @@ export default {
         email: '',
         password: '',
         statut: '',
-        etablissement: 'non specifié',
+        etablissement: '',
         niveauScolaire: [],
         name: '',
         lastname: '',
@@ -312,10 +314,9 @@ export default {
 
 <style>
   img.preview {
-      width: 200px;
-      background-color: white;
-      border: 1px solid #DDD;
-      padding: 5px;
+    width: 130px;
+    background-color: white;
+    padding: 5px;
   }
   .file-upload-form {
     position: relative;
@@ -345,5 +346,63 @@ export default {
     margin-top: 1rem;
     font-family: "quicksandbold";
     color: #463e3e;
+    font-size: 0.9rem;
+  }
+  /* TYPE D'UTILISATEUR */
+  .el-radio.is-bordered {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .el-radio.is-bordered+.el-radio.is-bordered {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+  }
+  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+    width: 100%;
+  }
+  .el-form-item .el-cascader {
+    width: 100%;
+  }
+  @media screen and (min-width: 500px) {
+    .el-form-item .el-form-item__content {
+      max-width: 420px;
+    }
+  }
+  @media screen and (min-width: 800px) {
+    .el-form.inscriptionForm {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: flex-start;
+    }
+      .el-form.inscriptionForm .el-form-item {
+        min-width: calc(50% - 2rem);
+        margin: 1rem;
+      }
+      .el-form.inscriptionForm .el-form-item:first-of-type,
+      .el-form.inscriptionForm .el-form-item.statutFormItem {
+        min-width:100%;
+        margin: 0 0 1rem 0.8rem;
+      }
+      .statutFormItem .el-form-item__content {
+        max-width: 100%;
+      }
+      .statutFormItem .el-radio.is-bordered {
+        display: inline-block;
+        min-width: 200px;
+      }
+      .el-form-item.validationBtn .el-button {
+        display: inline-block;
+        margin-top: 2.5rem;
+      }
+      a.noAccountLink {
+        margin: 1.5rem 0 1rem 1rem;
+        font-size: 1rem;
+      }
+  }
+  @media screen and (min-width: 1400px) {
+    .el-form.inscriptionForm .el-form-item {
+      min-width: calc(25% - 2rem);
+    }
   }
 </style>

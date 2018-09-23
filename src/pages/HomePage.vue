@@ -1,13 +1,10 @@
 <template>
   <section class="homePage">
-    <div class="diagonal-container">
-      <div class="diagonale">
         <h2>Bienvenue</h2>
-      </div>
       <!-- Bouton ouverture modale connexion -->
       <el-button type="success" @click="outerVisible = true">Se connecter</el-button>
       <!-- Pas encore inscrit ? -->
-      <router-link to='/signup'>Je souhaite m'inscrire</router-link>
+      <router-link class="needAccountLink" to='/signup'><font-awesome-icon icon="key" /> Je souhaite m'inscrire</router-link>
       <!-- Modale de connexion -->
       <el-dialog title="Connexion" :visible.sync="outerVisible">
         <!-- Sous modale de mot de passe oublié -->
@@ -28,14 +25,13 @@
           <el-input type="password" placeholder="Mot de passe" v-model="connectForm.password"></el-input>
           <el-button type="primary" @click="signIn">Se connecter</el-button>
           <!-- Pas encore inscrit ? -->
-          <router-link to='/signup'>Je souhaite m'inscrire</router-link>
+          <router-link class="needAccountLink" to='/signup'><font-awesome-icon icon="key" /> Je souhaite m'inscrire</router-link>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button type="danger" @click="outerVisible = false">Annuler</el-button>
           <el-button type="warning" @click="innerVisible = true">Mot de passe oublié ?</el-button>
         </div>
       </el-dialog>
-    </div>
   </section>
 </template>
 
@@ -113,5 +109,10 @@ export default {
 </script>
 
 <style>
-/* css */
+  a.needAccountLink {
+    display: block;
+    margin-top: 1rem;
+    font-family: "quicksandbold";
+    color: #463e3e;
+  }
 </style>

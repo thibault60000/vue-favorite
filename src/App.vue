@@ -60,9 +60,6 @@ export default {
   form > div.el-input {
     margin: 1rem 0;
   }
-  :not(.el-input--suffix) > input.el-input__inner {
-    max-width: 70%;
-  }
   /* VARIABLES CSS */
   $blue: #3a8ee6;
   /* BODY  */
@@ -74,16 +71,26 @@ export default {
     background-color: white;
     display: block;
     border-radius: 3.5px;
-    width: 50%;
     padding: 1.5rem;
+    width: calc(100% - 3rem);
+    margin-bottom: 1.5rem;
   }
   /* MAIN */
   main {
     transition: all 0.5s ease 0s;
     display: block;
-    padding: 2rem;
-    width: calc(100% - 4rem);
-    height: calc(100% - 4rem);
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+  }
+  @media screen and (min-width: 800px) {
+    main {
+      transition: all 0.5s ease 0s;
+      display: block;
+      padding: 2rem;
+      width: calc(100% - 4rem);
+      height: calc(100% - 4rem);
+    }
   }
   .el-form-item__label {
     text-align: left !important;
