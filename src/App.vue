@@ -35,14 +35,8 @@ export default {
   computed: {
     /* Converti en booléen l'existance ou non d'un utilisateur authentifié */
     authUserExist () {
-      return !!this.authUser
+      return firebase.auth().currentUser
     }
-  },
-  created () {
-    this.authUser = firebase.auth().currentUser
-  },
-  updated () {
-    this.authUser = firebase.auth().currentUser
   },
   methods: {
     logout () {

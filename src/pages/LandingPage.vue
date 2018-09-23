@@ -106,10 +106,11 @@ export default {
     }
       .createList li a {
         text-decoration: none;
-        padding: 0.5rem;
+        padding: 0.7rem 0.8rem;
         border-radius: 5px;
-        border-radius: 5px;
-        color: #ffffff;
+        font-size: 1.1rem;
+        font-family: 'quicksandbold';
+        color: white;
         box-shadow: 2px 2px 5px 1px #675b5bad;
       }
         .createList li a.createCourse {
