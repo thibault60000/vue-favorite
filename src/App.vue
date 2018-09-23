@@ -2,12 +2,14 @@
   <div id="app">
     <!-- MENU -->
     <Push right>
-      <router-link to='home'> <span> <font-awesome-icon icon="home" /> Accueil </span> </router-link>
-      <router-link to='courses'> <span> <font-awesome-icon icon="graduation-cap" /> Cours </span> </router-link>
-      <router-link to='articles'> <span> <font-awesome-icon icon="newspaper" /> Articles </span> </router-link>
+      <router-link v-if="!authUserExist" to='home'> <span> <font-awesome-icon icon="home" /> Accueil </span> </router-link>
+      <router-link v-if="authUserExist" to='landingpage'> <span> <font-awesome-icon icon="home" /> Accueil </span> </router-link>
+      <router-link v-if="authUserExist" to='courses'> <span> <font-awesome-icon icon="graduation-cap" /> Cours </span> </router-link>
+      <router-link v-if="authUserExist" to='articles'> <span> <font-awesome-icon icon="newspaper" /> Articles </span> </router-link>
       <router-link v-if="authUserExist" to='myaccount'> <span> <font-awesome-icon icon="user-circle" /> Mon compte </span> </router-link>
       <router-link class="registerLink" v-if="!authUserExist" to='signup'> <span> <font-awesome-icon icon="user-plus" /> Inscription </span> </router-link>
       <p class="logoutLink" v-if="authUserExist" @click="logout"> <span> <font-awesome-icon icon="door-open" /> Déconnexion </span> </p>
+      <router-link to="homepage" class="signInLink" v-if="!authUserExist"> <span> <font-awesome-icon icon="sign-in-alt" /> Connexion </span> </router-link>
     </Push>
     <!-- CONTENU PRINCIPAL -->
     <main id="page-wrap">
@@ -113,5 +115,11 @@ export default {
   }
   a.registerLink span:hover {
     text-decoration-color: #4CAF50;
+  }
+  a.signInLink span {
+    color: #FF5722;
+  }
+  a.signInLink span:hover{
+    text-decoration-color: #FF5722;
   }
 </style>

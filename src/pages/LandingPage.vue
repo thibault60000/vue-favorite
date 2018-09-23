@@ -79,6 +79,12 @@ export default {
     color: #3a8ee6;
     font-size: 1.2rem;
   }
+  ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
   .lastArticlesList li,
   .lastCoursesList li {
     background-color: #332e2e;
@@ -86,7 +92,8 @@ export default {
     padding: 1rem;
     border-radius: 4px;
     box-shadow: 4px 4px 6px 1px #b7b0b0;
-    margin: 0.8rem 0;
+    margin: 0 1rem 1rem 0;
+    max-width: calc(25% + 2rem);
   }
   .createList {
     position: absolute;
