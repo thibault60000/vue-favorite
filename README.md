@@ -1,30 +1,26 @@
-# vue-favorites
+:octocat: Thibault Jeanpierre
+# Vue-Favorite
+A little Vue.JS Application with Firebase (in construction!)
 
-> A Vue.js project
 
-## Build Setup
+_Learn to go from a chick_ :baby_chick: _to a sublime cock_ :chicken:
 
-``` bash
-# install dependencies
-npm install
+Build Setup 
 
-# serve with hot reload at localhost:8080
-npm run dev
+To Install : 
+> npm install
 
-# build for production with minification
-npm run build
+To Run : 
+> npm run start 
 
-# build for production and view the bundle analyzer report
-npm run build --report
+To Build : 
+> npm build
 
-# run unit tests
-npm run unit
+**My social networks**
+* [Twitter](https://twitter.com/ThibaultJP1)
+* [Github](https://github.com/thibault60000)
+* [Facebook](https://www.facebook.com/ThibaultJP60000) (leave in progress)
+* [LinkedIn](https://www.linkedin.com/in/thibault-jeanpierre-a9b40295/)
 
-# run e2e tests
-npm run e2e
+And my Website [here](https://thibault60000.github.io/thibaultjeanpierre--website/) (the new is under construction)
 
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
